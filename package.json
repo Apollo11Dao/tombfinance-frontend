@@ -1,7 +1,6 @@
 {
   "name": "icecream-finance",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@ethersproject/providers": "^5.4.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
