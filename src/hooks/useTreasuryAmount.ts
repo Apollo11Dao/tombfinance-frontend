@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
-import useTombFinance from './useTombFinance';
+import useIceCreamFinance from './useIceCreamFinance';
 
 const useTreasuryAmount = () => {
   const [amount, setAmount] = useState(BigNumber.from(0));
-  const tombFinance = useTombFinance();
+  const icecreamFinance = useIceCreamFinance();
 
   useEffect(() => {
-    if (tombFinance) {
-      const { Treasury } = tombFinance.contracts;
-      tombFinance.TOMB.balanceOf(Treasury.address).then(setAmount);
+    if (icecreamFinance) {
+      const { Treasury } = icecreamFinance.contracts;
+      icecreamFinance.CREAM.balanceOf(Treasury.address).then(setAmount);
     }
-  }, [tombFinance]);
+  }, [icecreamFinance]);
   return amount;
 };
 

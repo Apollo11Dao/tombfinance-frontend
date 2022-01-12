@@ -95,23 +95,23 @@ const Nav = () => {
         {matches ? (
           <>
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-              {/* <a className={ classes.brandLink } href="/">Tomb Finance</a> */}
+              {/* <a className={ classes.brandLink } href="/">IceCream Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
-                Tomb Finance
+                IceCream Finance
               </Link>
             </Typography>
             <Box mr={5}>
               <Link color="textPrimary" to="/" className={classes.link}>
                 Home
               </Link>
-              <Link color="textPrimary" to="/cemetery" className={classes.link}>
-                Cemetery
+              <Link color="textPrimary" to="/creamery" className={classes.link}>
+                Creamery
               </Link>
-              <Link color="textPrimary" to="/masonry" className={classes.link}>
-                Masonry
+              <Link color="textPrimary" to="/parlour" className={classes.link}>
+                Parlour
               </Link>
-              <Link color="textPrimary" to="/pit" className={classes.link}>
-                Pit
+              <Link color="textPrimary" to="/factory" className={classes.link}>
+                Factory
               </Link>
               <Link color="textPrimary" to="/sbs" className={classes.link}>
                 SBS
@@ -122,7 +122,7 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link>
-              <a href="https://docs.tomb.finance" className={classes.link}>
+              <a href="https://docs.icecream.finance" className={classes.link}>
                 Docs
               </a>
             </Box>
@@ -140,7 +140,7 @@ const Nav = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Tomb Finance
+              IceCream Finance
             </Typography>
 
             <Drawer
@@ -162,13 +162,13 @@ const Nav = () => {
               <Divider />
               <List>
                 <ListItemLink primary="Home" to="/" />
-                <ListItemLink primary="Cemetery" to="/cemetery" />
-                <ListItemLink primary="Masonry" to="/masonry" />
-                <ListItemLink primary="Pit" to="/pit" />
+                <ListItemLink primary="Creamery" to="/creamery" />
+                <ListItemLink primary="Parlour" to="/parlour" />
+                <ListItemLink primary="Factory" to="/factory" />
                 <ListItemLink primary="SBS" to="/sbs" />
                 <ListItemLink primary="Liquidity" to="/liquidity" />
                 <ListItemLink primary="Regulations" to="/regulations" />
-                <ListItem button component="a" href="https://docs.tomb.finance">
+                <ListItem button component="a" href="https://docs.IceCream.finance">
                   <ListItemText>Docs</ListItemText>
                 </ListItem>
                 <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

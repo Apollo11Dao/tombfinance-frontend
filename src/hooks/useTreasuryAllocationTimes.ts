@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
-import { AllocationTime } from '../tomb-finance/types';
+import useIceCreamFinance from './useIceCreamFinance';
+import { AllocationTime } from '../icecream-finance/types';
 import useRefresh from './useRefresh';
 
 
@@ -10,12 +10,12 @@ const useTreasuryAllocationTimes = () => {
     from: new Date(),
     to: new Date(),
   });
-  const tombFinance = useTombFinance();
+  const icecreamFinance = useIceCreamFinance();
   useEffect(() => {
-    if (tombFinance) {
-      tombFinance.getTreasuryNextAllocationTime().then(setTime);
+    if (icecreamFinance) {
+      icecreamFinance.getTreasuryNextAllocationTime().then(setTime);
     }
-  }, [tombFinance, slowRefresh]);
+  }, [icecreamFinance, slowRefresh]);
   return time;
 };
 

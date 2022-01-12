@@ -2637,6 +2637,19 @@
     truffle-flattener "^1.4.4"
     truffle-hdwallet-provider "^1.0.17"
 
+"@pancakeswap/sdk@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@pancakeswap/sdk/-/sdk-2.4.0.tgz#5da040384419cb45ea2b6eee8104d05914e8bd28"
+  integrity sha512-c5cLOMVa/dlbVbURPpSY6oNSYm61xN5NgfoYCXY88NisHbgLWd/MNHoM98XjgeJFs7OlKcf4G7nui4XGM9lDSA==
+  dependencies:
+    "@pancakeswap-libs/pancake-swap-core" "^0.1.0"
+    big.js "^5.2.2"
+    decimal.js-light "^2.5.0"
+    jsbi "^3.1.1"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.3"
+    toformat "^2.0.0"
+
 "@portis/web3-provider-engine@1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@portis/web3-provider-engine/-/web3-provider-engine-1.1.2.tgz#97f383156ea6b70fba69ae93a945fdd94159b1ba"
@@ -2808,30 +2821,6 @@
 "@solidity-parser/parser@^0.8.0":
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/@solidity-parser/parser/-/parser-0.8.2.tgz#a6a5e93ac8dca6884a99a532f133beba59b87b69"
-
-"@spiritswap/sdk@https://github.com/Layer3Org/spiritswap-sdk":
-  version "1.0.1"
-  resolved "https://github.com/Layer3Org/spiritswap-sdk#99b84a48b000a9f871b00cb0f84b5aac05196121"
-  dependencies:
-    "@pancakeswap-libs/pancake-swap-core" "^0.1.0"
-    big.js "^5.2.2"
-    decimal.js-light "^2.5.0"
-    jsbi "^3.1.1"
-    tiny-invariant "^1.1.0"
-    tiny-warning "^1.0.3"
-    toformat "^2.0.0"
-
-"@spookyswap/sdk@https://github.com/SpookySwap/spookyswap-sdk":
-  version "1.0.0"
-  resolved "https://github.com/SpookySwap/spookyswap-sdk#c5c85de6a324f190b44ce1d9aa26f87e1a54e9c5"
-  dependencies:
-    "@uniswap/v2-core" "1.0.0"
-    big.js "^5.2.2"
-    decimal.js-light "^2.5.0"
-    jsbi "^3.1.1"
-    tiny-invariant "^1.1.0"
-    tiny-warning "^1.0.3"
-    toformat "^2.0.0"
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
@@ -3949,10 +3938,6 @@
   dependencies:
     "@typescript-eslint/types" "4.30.0"
     eslint-visitor-keys "^2.0.0"
-
-"@uniswap/v2-core@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@uniswap/v2-core/-/v2-core-1.0.0.tgz#e0fab91a7d53e8cafb5326ae4ca18351116b0844"
 
 "@walletconnect/browser-utils@^1.6.5":
   version "1.6.5"

@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
-import { TokenStat } from '../tomb-finance/types';
+import useIceCreamFinance from './useIceCreamFinance';
+import { TokenStat } from '../icecream-finance/types';
 import useRefresh from './useRefresh';
 
 const useCashPriceInEstimatedTWAP = () => {
   const [stat, setStat] = useState<TokenStat>();
-  const tombFinance = useTombFinance();
+  const icecreamFinance = useIceCreamFinance();
   const { slowRefresh } = useRefresh(); 
 
   useEffect(() => {
     async function fetchCashPrice() {
       try {
-        setStat(await tombFinance.getTombStatInEstimatedTWAP());
+        setStat(await icecreamFinance.getCreamStatInEstimatedTWAP());
       }catch(err) {
         console.error(err);
       }
     }
     fetchCashPrice();
-  }, [setStat, tombFinance, slowRefresh]);
+  }, [setStat, icecreamFinance, slowRefresh]);
 
   return stat;
 };

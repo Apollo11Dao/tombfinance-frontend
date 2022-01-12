@@ -4,15 +4,15 @@ import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
 import useLpStats from '../../hooks/useLpStats';
 import { Box, Button, Grid, Paper, Typography } from '@material-ui/core';
-import useTombStats from '../../hooks/useTombStats';
+import useCreamStats from '../../hooks/useCreamStats';
 import TokenInput from '../../components/TokenInput';
-import useTombFinance from '../../hooks/useTombFinance';
+import useCreamFinance from '../../hooks/useIceCreamFinance';
 import { useWallet } from 'use-wallet';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import useApproveTaxOffice from '../../hooks/useApproveTaxOffice';
 import { ApprovalState } from '../../hooks/useApprove';
-import useProvideTombFtmLP from '../../hooks/useProvideTombFtmLP';
+import useProvideCreamFtmLP from '../../hooks/useProvideCreamFtmLP';
 import { Alert } from '@material-ui/lab';
 
 const BackgroundImage = createGlobalStyle`
@@ -26,32 +26,32 @@ function isNumeric(n) {
 }
 
 const ProvideLiquidity = () => {
-  const [tombAmount, setTombAmount] = useState(0);
+  const [creamAmount, setCreamAmount] = useState(0);
   const [ftmAmount, setFtmAmount] = useState(0);
   const [lpTokensAmount, setLpTokensAmount] = useState(0);
   const { balance } = useWallet();
-  const tombStats = useTombStats();
-  const tombFinance = useTombFinance();
+  const creamStats = useCreamStats();
+  const creamFinance = useCreamFinance();
   const [approveTaxOfficeStatus, approveTaxOffice] = useApproveTaxOffice();
-  const tombBalance = useTokenBalance(tombFinance.TOMB);
+  const creamBalance = useTokenBalance(creamFinance.CREAM);
   const ftmBalance = (balance / 1e18).toFixed(4);
-  const { onProvideTombFtmLP } = useProvideTombFtmLP();
-  const tombFtmLpStats = useLpStats('TOMB-FTM-LP');
+  const { onProvideCreamFtmLP } = useProvideCreamFtmLP();
+  const creamFtmLpStats = useLpStats('CREAM-FTM-LP');
 
-  const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
-  const tombPriceInFTM = useMemo(() => (tombStats ? Number(tombStats.tokenInFtm).toFixed(2) : null), [tombStats]);
-  const ftmPriceInTOMB = useMemo(() => (tombStats ? Number(1 / tombStats.tokenInFtm).toFixed(2) : null), [tombStats]);
+  const creamLPStats = useMemo(() => (creamFtmLpStats ? creamFtmLpStats : null), [creamFtmLpStats]);
+  const creamPriceInFTM = useMemo(() => (creamStats ? Number(creamStats.tokenInFtm).toFixed(2) : null), [creamStats]);
+  const ftmPriceInCREAM = useMemo(() => (creamStats ? Number(1 / creamStats.tokenInFtm).toFixed(2) : null), [creamStats]);
   // const classes = useStyles();
 
-  const handleTombChange = async (e) => {
+  const handleCreamChange = async (e) => {
     if (e.currentTarget.value === '' || e.currentTarget.value === 0) {
-      setTombAmount(e.currentTarget.value);
+      setCreamAmount(e.currentTarget.value);
     }
     if (!isNumeric(e.currentTarget.value)) return;
-    setTombAmount(e.currentTarget.value);
-    const quoteFromSpooky = await tombFinance.quoteFromSpooky(e.currentTarget.value, 'TOMB');
+    setCreamAmount(e.currentTarget.value);
+    const quoteFromSpooky = await creamFinance.quoteFromSpooky(e.currentTarget.value, 'CREAM');
     setFtmAmount(quoteFromSpooky);
-    setLpTokensAmount(quoteFromSpooky / tombLPStats.ftmAmount);
+    setLpTokensAmount(quoteFromSpooky / creamLPStats.ftmAmount);
   };
 
   const handleFtmChange = async (e) => {
@@ -60,22 +60,22 @@ const ProvideLiquidity = () => {
     }
     if (!isNumeric(e.currentTarget.value)) return;
     setFtmAmount(e.currentTarget.value);
-    const quoteFromSpooky = await tombFinance.quoteFromSpooky(e.currentTarget.value, 'FTM');
-    setTombAmount(quoteFromSpooky);
+    const quoteFromSpooky = await creamFinance.quoteFromSpooky(e.currentTarget.value, 'FTM');
+    setCreamAmount(quoteFromSpooky);
 
-    setLpTokensAmount(quoteFromSpooky / tombLPStats.tokenAmount);
+    setLpTokensAmount(quoteFromSpooky / creamLPStats.tokenAmount);
   };
-  const handleTombSelectMax = async () => {
-    const quoteFromSpooky = await tombFinance.quoteFromSpooky(getDisplayBalance(tombBalance), 'TOMB');
-    setTombAmount(getDisplayBalance(tombBalance));
+  const handleCreamSelectMax = async () => {
+    const quoteFromSpooky = await creamFinance.quoteFromSpooky(getDisplayBalance(creamBalance), 'CREAM');
+    setCreamAmount(getDisplayBalance(creamBalance));
     setFtmAmount(quoteFromSpooky);
-    setLpTokensAmount(quoteFromSpooky / tombLPStats.ftmAmount);
+    setLpTokensAmount(quoteFromSpooky / creamLPStats.ftmAmount);
   };
   const handleFtmSelectMax = async () => {
-    const quoteFromSpooky = await tombFinance.quoteFromSpooky(ftmBalance, 'FTM');
+    const quoteFromSpooky = await creamFinance.quoteFromSpooky(ftmBalance, 'FTM');
     setFtmAmount(ftmBalance);
-    setTombAmount(quoteFromSpooky);
-    setLpTokensAmount(ftmBalance / tombLPStats.ftmAmount);
+    setCreamAmount(quoteFromSpooky);
+    setLpTokensAmount(ftmBalance / creamLPStats.ftmAmount);
   };
   return (
     <Page>
@@ -87,7 +87,7 @@ const ProvideLiquidity = () => {
       <Grid container justify="center">
         <Box style={{ width: '600px' }}>
           <Alert variant="filled" severity="warning" style={{ marginBottom: '10px' }}>
-            <b>This and <a href="https://spookyswap.finance/"  rel="noopener noreferrer" target="_blank">Spookyswap</a> are the only ways to provide Liquidity on TOMB-FTM pair without paying tax.</b>
+            <b>This and <a href="https://spookyswap.finance/"  rel="noopener noreferrer" target="_blank">Spookyswap</a> are the only ways to provide Liquidity on CREAM-FTM pair without paying tax.</b>
           </Alert>
           <Grid item xs={12} sm={12}>
             <Paper>
@@ -97,11 +97,11 @@ const ProvideLiquidity = () => {
                     <Grid container>
                       <Grid item xs={12}>
                         <TokenInput
-                          onSelectMax={handleTombSelectMax}
-                          onChange={handleTombChange}
-                          value={tombAmount}
-                          max={getDisplayBalance(tombBalance)}
-                          symbol={'TOMB'}
+                          onSelectMax={handleCreamSelectMax}
+                          onChange={handleCreamChange}
+                          value={creamAmount}
+                          max={getDisplayBalance(creamBalance)}
+                          symbol={'CREAM'}
                         ></TokenInput>
                       </Grid>
                       <Grid item xs={12}>
@@ -114,15 +114,15 @@ const ProvideLiquidity = () => {
                         ></TokenInput>
                       </Grid>
                       <Grid item xs={12}>
-                        <p>1 TOMB = {tombPriceInFTM} FTM</p>
-                        <p>1 FTM = {ftmPriceInTOMB} TOMB</p>
+                        <p>1 CREAM = {creamPriceInFTM} FTM</p>
+                        <p>1 FTM = {ftmPriceInCREAM} CREAM</p>
                         <p>LP tokens ≈ {lpTokensAmount.toFixed(2)}</p>
                       </Grid>
                       <Grid xs={12} justifyContent="center" style={{ textAlign: 'center' }}>
                         {approveTaxOfficeStatus === ApprovalState.APPROVED ? (
                           <Button
                             variant="contained"
-                            onClick={() => onProvideTombFtmLP(ftmAmount.toString(), tombAmount.toString())}
+                            onClick={() => onProvideCreamFtmLP(ftmAmount.toString(), creamAmount.toString())}
                             color="primary"
                             style={{ margin: '0 10px', color: '#fff' }}
                           >

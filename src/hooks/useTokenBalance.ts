@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
-import ERC20 from '../tomb-finance/ERC20';
-import useTombFinance from './useTombFinance';
+import ERC20 from '../icecream-finance/ERC20';
+import useIceCreamFinance from './useIceCreamFinance';
 import config from '../config';
 
 const useTokenBalance = (token: ERC20) => {
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const tombFinance = useTombFinance();
-  const isUnlocked = tombFinance?.isUnlocked;
+  const icecreamFinance = useIceCreamFinance();
+  const isUnlocked = icecreamFinance?.isUnlocked;
 
   const fetchBalance = useCallback(async () => {
-    setBalance(await token.balanceOf(tombFinance.myAccount));
-  }, [token, tombFinance.myAccount]);
+    setBalance(await token.balanceOf(icecreamFinance.myAccount));
+  }, [token, icecreamFinance.myAccount]);
 
   useEffect(() => {
     if (isUnlocked) {
@@ -19,7 +19,7 @@ const useTokenBalance = (token: ERC20) => {
       let refreshInterval = setInterval(fetchBalance, config.refreshInterval);
       return () => clearInterval(refreshInterval);
     }
-  }, [isUnlocked, token, fetchBalance, tombFinance]);
+  }, [isUnlocked, token, fetchBalance, icecreamFinance]);
 
   return balance;
 };

@@ -6,7 +6,7 @@ import { ThemeProvider as TP1 } from 'styled-components';
 import { UseWalletProvider } from 'use-wallet';
 import usePromptNetwork from './hooks/useNetworkPrompt';
 import BanksProvider from './contexts/Banks';
-import TombFinanceProvider from './contexts/TombFinanceProvider';
+import IceCreamFinanceProvider from './contexts/IceCreamFinanceProvider';
 import ModalsProvider from './contexts/Modals';
 import store from './state';
 import theme from './theme';
@@ -19,9 +19,9 @@ import Regulations from './views/Regulations/Regulations';
 import { RefreshContextProvider } from './contexts/RefreshContext';
 
 const Home = lazy(() => import('./views/Home'));
-const Cemetery = lazy(() => import('./views/Cemetery'));
-const Masonry = lazy(() => import('./views/Masonry'));
-const Pit = lazy(() => import('./views/Pit'));
+const Creamery = lazy(() => import('./views/Creamery'));
+const Parlour = lazy(() => import('./views/Parlour'));
+const Factory = lazy(() => import('./views/Factory'));
 const SBS = lazy(() => import('./views/Sbs'));
 const Liquidity = lazy(() => import('./views/Liquidity'));
 
@@ -49,14 +49,14 @@ const App: React.FC = () => {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/cemetery">
-              <Cemetery />
+            <Route path="/creamery">
+              <Creamery />
             </Route>
-            <Route path="/masonry">
-              <Masonry />
+            <Route path="/parlour">
+              <Parlour />
             </Route>
-            <Route path="/pit">
-              <Pit />
+            <Route path="/factory">
+              <Factory />
             </Route>
             <Route path="/sbs">
               <SBS />
@@ -87,15 +87,15 @@ const Providers: React.FC = ({ children }) => {
             walletconnect: { rpcUrl: config.defaultProvider },
             walletlink: {
               url: config.defaultProvider,
-              appName: 'Tomb Finance',
-              appLogoUrl: 'https://github.com/tombfinance/tombfinance-assets/blob/master/logo_tomb_NoBG.png',
+              appName: 'IceCream Finance',
+              appLogoUrl: './logo192.png',
             },
           }}
         >
           <Provider store={store}>
             <Updaters />
             <RefreshContextProvider>
-              <TombFinanceProvider>
+              <IceCreamFinanceProvider>
                 <ModalsProvider>
                   <BanksProvider>
                     <>
@@ -104,7 +104,7 @@ const Providers: React.FC = ({ children }) => {
                     </>
                   </BanksProvider>
                 </ModalsProvider>
-              </TombFinanceProvider>
+              </IceCreamFinanceProvider>
             </RefreshContextProvider>
           </Provider>
         </UseWalletProvider>

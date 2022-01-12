@@ -1,23 +1,23 @@
 import { useCallback, useState, useEffect } from 'react';
-import useTombFinance from './useTombFinance';
-import { Bank } from '../tomb-finance';
-import { PoolStats } from '../tomb-finance/types';
+import useIceCreamFinance from './useIceCreamFinance';
+import { Bank } from '../icecream-finance';
+import { PoolStats } from '../icecream-finance/types';
 import config from '../config';
 
 const useStatsForPool = (bank: Bank) => {
-  const tombFinance = useTombFinance();
+  const icecreamFinance = useIceCreamFinance();
 
   const [poolAPRs, setPoolAPRs] = useState<PoolStats>();
 
   const fetchAPRsForPool = useCallback(async () => {
-    setPoolAPRs(await tombFinance.getPoolAPRs(bank));
-  }, [tombFinance, bank]);
+    setPoolAPRs(await icecreamFinance.getPoolAPRs(bank));
+  }, [icecreamFinance, bank]);
 
   useEffect(() => {
-    fetchAPRsForPool().catch((err) => console.error(`Failed to fetch TBOND price: ${err.stack}`));
+    fetchAPRsForPool().catch((err) => console.error(`Failed to fetch CBOND price: ${err.stack}`));
     const refreshInterval = setInterval(fetchAPRsForPool, config.refreshInterval);
     return () => clearInterval(refreshInterval);
-  }, [setPoolAPRs, tombFinance, fetchAPRsForPool]);
+  }, [setPoolAPRs, icecreamFinance, fetchAPRsForPool]);
 
   return poolAPRs;
 };

@@ -1,6 +1,6 @@
 import React, { /*useCallback, useEffect, */useMemo, useState } from 'react';
 import Page from '../../components/Page';
-import PitImage from '../../assets/img/pit.png';
+import FactoryImage from '../../assets/img/factory.png';
 import { createGlobalStyle } from 'styled-components';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useWallet } from 'use-wallet';
@@ -9,12 +9,12 @@ import PageHeader from '../../components/PageHeader';
 import { Box,/* Paper, Typography,*/ Button, Grid } from '@material-ui/core';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
-import useTombFinance from '../../hooks/useTombFinance';
+import useIceCreamFinance from '../../hooks/useIceCreamFinance';
 import { getDisplayBalance/*, getBalance*/ } from '../../utils/formatBalance';
 import { BigNumber/*, ethers*/ } from 'ethers';
-import useSwapTBondToTShare from '../../hooks/TShareSwapper/useSwapTBondToTShare';
+import useSwapCBondToCShare from '../../hooks/CShareSwapper/useSwapCBondToCShare';
 import useApprove, { ApprovalState } from '../../hooks/useApprove';
-import useTShareSwapperStats from '../../hooks/TShareSwapper/useTShareSwapperStats';
+import useCShareSwapperStats from '../../hooks/CShareSwapper/useCShareSwapperStats';
 import TokenInput from '../../components/TokenInput';
 import Card from '../../components/Card';
 import CardContent from '../../components/CardContent';
@@ -22,7 +22,7 @@ import TokenSymbol from '../../components/TokenSymbol';
 
 const BackgroundImage = createGlobalStyle`
   body {
-    background: url(${PitImage}) no-repeat !important;
+    background: url(${FactoryImage}) no-repeat !important;
     background-size: cover !important;
   }
 `;
@@ -34,54 +34,54 @@ function isNumeric(n: any) {
 const Sbs: React.FC = () => {
   const { path } = useRouteMatch();
   const { account } = useWallet();
-  const tombFinance = useTombFinance();
-  const [tbondAmount, setTbondAmount] = useState('');
-  const [tshareAmount, setTshareAmount] = useState('');
+  const icecreamFinance = useIceCreamFinance();
+  const [cbondAmount, setCbondAmount] = useState('');
+  const [cshareAmount, setCshareAmount] = useState('');
 
-  const [approveStatus, approve] = useApprove(tombFinance.TBOND, tombFinance.contracts.TShareSwapper.address);
-  const { onSwapTShare } = useSwapTBondToTShare();
-  const tshareSwapperStat = useTShareSwapperStats(account);
+  const [approveStatus, approve] = useApprove(icecreamFinance.CBOND, icecreamFinance.contracts.CShareSwapper.address);
+  const { onSwapCShare } = useSwapCBondToCShare();
+  const cshareSwapperStat = useCShareSwapperStats(account);
 
-  const tshareBalance = useMemo(() => (tshareSwapperStat ? Number(tshareSwapperStat.tshareBalance) : 0), [tshareSwapperStat]);
-  const bondBalance = useMemo(() => (tshareSwapperStat ? Number(tshareSwapperStat.tbondBalance) : 0), [tshareSwapperStat]);
+  const cshareBalance = useMemo(() => (cshareSwapperStat ? Number(cshareSwapperStat.cshareBalance) : 0), [cshareSwapperStat]);
+  const bondBalance = useMemo(() => (cshareSwapperStat ? Number(cshareSwapperStat.cbondBalance) : 0), [cshareSwapperStat]);
 
-  const handleTBondChange = async (e: any) => {
+  const handleCBondChange = async (e: any) => {
     if (e.currentTarget.value === '') {
-      setTbondAmount('');
-      setTshareAmount('');
+      setCbondAmount('');
+      setCshareAmount('');
       return
     }
     if (!isNumeric(e.currentTarget.value)) return;
-    setTbondAmount(e.currentTarget.value);
-    const updateTShareAmount = await tombFinance.estimateAmountOfTShare(e.currentTarget.value);
-    setTshareAmount(updateTShareAmount);  
+    setCbondAmount(e.currentTarget.value);
+    const updateCShareAmount = await icecreamFinance.estimateAmountOfCShare(e.currentTarget.value);
+    setCshareAmount(updateCShareAmount);  
   };
 
-  const handleTBondSelectMax = async () => {
-    setTbondAmount(String(bondBalance));
-    const updateTShareAmount = await tombFinance.estimateAmountOfTShare(String(bondBalance));
-    setTshareAmount(updateTShareAmount); 
+  const handleCBondSelectMax = async () => {
+    setCbondAmount(String(bondBalance));
+    const updateCShareAmount = await icecreamFinance.estimateAmountOfCShare(String(bondBalance));
+    setCshareAmount(updateCShareAmount); 
   };
 
-  const handleTShareSelectMax = async () => {
-    setTshareAmount(String(tshareBalance));
-    const rateTSharePerTomb = (await tombFinance.getTShareSwapperStat(account)).rateTSharePerTomb;
-    const updateTBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateTSharePerTomb))).mul(Number(tshareBalance) * 1e6);
-    setTbondAmount(getDisplayBalance(updateTBondAmount, 18, 6));
+  const handleCShareSelectMax = async () => {
+    setCshareAmount(String(cshareBalance));
+    const rateCSharePerCream = (await icecreamFinance.getCShareSwapperStat(account)).rateCSharePerCream;
+    const updateCBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateCSharePerCream))).mul(Number(cshareBalance) * 1e6);
+    setCbondAmount(getDisplayBalance(updateCBondAmount, 18, 6));
   };
 
-  const handleTShareChange = async (e: any) => {
+  const handleCShareChange = async (e: any) => {
     const inputData = e.currentTarget.value;
     if (inputData === '') {
-      setTshareAmount('');
-      setTbondAmount('');
+      setCshareAmount('');
+      setCbondAmount('');
       return
     }
     if (!isNumeric(inputData)) return;
-    setTshareAmount(inputData);
-    const rateTSharePerTomb = (await tombFinance.getTShareSwapperStat(account)).rateTSharePerTomb;
-    const updateTBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateTSharePerTomb))).mul(Number(inputData) * 1e6);
-    setTbondAmount(getDisplayBalance(updateTBondAmount, 18, 6));
+    setCshareAmount(inputData);
+    const rateCSharePerCream = (await icecreamFinance.getCShareSwapperStat(account)).rateCSharePerCream;
+    const updateCBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateCSharePerCream))).mul(Number(inputData) * 1e6);
+    setCbondAmount(getDisplayBalance(updateCBondAmount, 18, 6));
   }
 
   return (
@@ -91,7 +91,7 @@ const Sbs: React.FC = () => {
         {!!account ? (
           <>
             <Route exact path={path}>
-              <PageHeader icon={'🏦'} title="TBond -> TShare Swap" subtitle="Swap TBond to TShare" />
+              <PageHeader icon={'🏦'} title="CBond -> CShare Swap" subtitle="Swap CBond to CShare" />
             </Route>
             <Box mt={5}>
               <Grid container justify="center" spacing={6}>
@@ -101,24 +101,24 @@ const Sbs: React.FC = () => {
                       <Card>
                         <CardContent>
                           <StyledCardContentInner>
-                            <StyledCardTitle>TBonds</StyledCardTitle>
+                            <StyledCardTitle>CBonds</StyledCardTitle>
                             <StyledExchanger>
                               <StyledToken>
                                 <StyledCardIcon>
-                                  <TokenSymbol symbol={tombFinance.TBOND.symbol} size={54} />
+                                  <TokenSymbol symbol={icecreamFinance.CBOND.symbol} size={54} />
                                 </StyledCardIcon>
                               </StyledToken>
                             </StyledExchanger>
                             <Grid item xs={12}>
                               <TokenInput
-                                onSelectMax={handleTBondSelectMax}
-                                onChange={handleTBondChange}
-                                value={tbondAmount}
+                                onSelectMax={handleCBondSelectMax}
+                                onChange={handleCBondChange}
+                                value={cbondAmount}
                                 max={bondBalance}
-                                symbol="TBond"
+                                symbol="CBond"
                               ></TokenInput>
                             </Grid>
-                            <StyledDesc>{`${bondBalance} TBOND Available in Wallet`}</StyledDesc>
+                            <StyledDesc>{`${bondBalance} CBOND Available in Wallet`}</StyledDesc>
                           </StyledCardContentInner>
                         </CardContent>
                       </Card>
@@ -128,24 +128,24 @@ const Sbs: React.FC = () => {
                       <Card>
                         <CardContent>
                           <StyledCardContentInner>
-                            <StyledCardTitle>TShare</StyledCardTitle>
+                            <StyledCardTitle>CShare</StyledCardTitle>
                             <StyledExchanger>
                               <StyledToken>
                                 <StyledCardIcon>
-                                  <TokenSymbol symbol={tombFinance.TSHARE.symbol} size={54} />
+                                  <TokenSymbol symbol={icecreamFinance.CSHARE.symbol} size={54} />
                                 </StyledCardIcon>
                               </StyledToken>
                             </StyledExchanger>
                             <Grid item xs={12}>
                               <TokenInput
-                                onSelectMax={handleTShareSelectMax}
-                                onChange={handleTShareChange}
-                                value={tshareAmount}
-                                max={tshareBalance}
-                                symbol="TShare"
+                                onSelectMax={handleCShareSelectMax}
+                                onChange={handleCShareChange}
+                                value={cshareAmount}
+                                max={cshareBalance}
+                                symbol="CShare"
                               ></TokenInput>
                             </Grid>
-                            <StyledDesc>{`${tshareBalance} TSHARE Available in Swapper`}</StyledDesc>
+                            <StyledDesc>{`${cshareBalance} CSHARE Available in Swapper`}</StyledDesc>
                           </StyledCardContentInner>
                         </CardContent>
                       </Card>
@@ -170,13 +170,13 @@ const Sbs: React.FC = () => {
                           onClick={approve}
                           size="medium"
                         >
-                          Approve TBOND
+                          Approve CBOND
                         </Button>
                       ) : (
                         <Button
                           color="primary"
                           variant="contained"
-                          onClick={() => onSwapTShare(tbondAmount.toString())}
+                          onClick={() => onSwapCShare(cbondAmount.toString())}
                           size="medium"
                         >
                           Swap

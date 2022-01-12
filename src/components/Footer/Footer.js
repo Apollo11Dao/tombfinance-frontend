@@ -45,14 +45,14 @@ const Footer = () => {
             <Typography variant="body2" color="textSecondary" align="left">
               {'Copyright © '}
               <Link color="inherit" href="/">
-                Tomb Finance
+                IceCream Finance
               </Link>{' '}
               {new Date().getFullYear()}
             </Typography>
           </Grid>
           <Grid item xs={6} style={{ textAlign: 'right' }}>
             <a
-              href="https://twitter.com/tombfinance"
+              href="https://twitter.com/icecreamfinance"
               rel="noopener noreferrer"
               target="_blank"
               className={classes.link}
@@ -60,25 +60,25 @@ const Footer = () => {
               <img alt="twitter" src={TwitterImage} className={classes.img} />
             </a>
             <a
-              href="https://github.com/tombfinance/tombfinance-frontend"
+              href="https://github.com/icecreamfinance/icecreamfinance-frontend"
               rel="noopener noreferrer"
               target="_blank"
               className={classes.link}
             >
               <img alt="github" src={GithubImage} className={classes.img} />
             </a>
-            <a href="https://t.me/tombfinance" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a href="https://telegram.com" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="telegram" src={TelegramImage} className={classes.img} />
             </a>
             <a
-              href="https://www.youtube.com/channel/UCGf87DxPzLXwPrfYpXIkaLQ"
+              href="https://www.youtube.com/"
               rel="noopener noreferrer"
               target="_blank"
               className={classes.link}
             >
               <img alt="youtube" src={YoutubeImage} className={classes.img} />
             </a>
-            <a href="http://discord.tomb.finance/" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a href="http://discord.com" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="discord" src={DiscordImage} className={classes.img} />
             </a>
           </Grid>

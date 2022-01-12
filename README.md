@@ -1,4 +1,4 @@
-# 🪦Welcome to the Tomb.Finance ecosystem🪦
+# 🪦Welcome to the IceCream Finance ecosystem🪦
 
 Thanks for taking the time to contribute!
 You can start by reading our [Contribution guidelines](CONTRIBUTING.md) first.
@@ -32,7 +32,3 @@ npx prettier --write .
 
 ## Useful Resources
 
-- [Our project documentation](https://docs.tomb.finance/) will help you understand before start contributing
-- Join our [Discord](https://discord.gg/tombfinance) community
-- Or if you are more of a [Telegram Zombie](https://discord.gg/tombfinance) we have that too
-- Bugs? Use the [Issues](https://github.com/tombfinance/tombfinance-frontend/issues) section of our github to report them

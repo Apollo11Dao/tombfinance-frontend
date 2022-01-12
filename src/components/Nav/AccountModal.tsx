@@ -6,20 +6,20 @@ import { getDisplayBalance } from '../../utils/formatBalance';
 import Label from '../Label';
 import Modal, { ModalProps } from '../Modal';
 import ModalTitle from '../ModalTitle';
-import useTombFinance from '../../hooks/useTombFinance';
+import useIceCreamFinance from '../../hooks/useIceCreamFinance';
 import TokenSymbol from '../TokenSymbol';
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
-  const tombFinance = useTombFinance();
+  const icecreamFinance = useIceCreamFinance();
 
-  const tombBalance = useTokenBalance(tombFinance.TOMB);
-  const displayTombBalance = useMemo(() => getDisplayBalance(tombBalance), [tombBalance]);
+  const creamBalance = useTokenBalance(IceCreamFinance.CREAM);
+  const displayCreamBalance = useMemo(() => getDisplayBalance(creamBalance), [creamBalance]);
 
-  const tshareBalance = useTokenBalance(tombFinance.TSHARE);
-  const displayTshareBalance = useMemo(() => getDisplayBalance(tshareBalance), [tshareBalance]);
+  const cshareBalance = useTokenBalance(icecreamFinance.CSHARE);
+  const displayCshareBalance = useMemo(() => getDisplayBalance(cshareBalance), [cshareBalance]);
 
-  const tbondBalance = useTokenBalance(tombFinance.TBOND);
-  const displayTbondBalance = useMemo(() => getDisplayBalance(tbondBalance), [tbondBalance]);
+  const cbondBalance = useTokenBalance(icecreamFinance.CBOND);
+  const displayCbondBalance = useMemo(() => getDisplayBalance(cbondBalance), [cbondBalance]);
 
   return (
     <Modal>
@@ -27,26 +27,26 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
 
       <Balances>
         <StyledBalanceWrapper>
-          <TokenSymbol symbol="TOMB" />
+          <TokenSymbol symbol="CREAM" />
           <StyledBalance>
-            <StyledValue>{displayTombBalance}</StyledValue>
-            <Label text="TOMB Available" />
+            <StyledValue>{displayCreamBalance}</StyledValue>
+            <Label text="CREAM Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
 
         <StyledBalanceWrapper>
-          <TokenSymbol symbol="TSHARE" />
+          <TokenSymbol symbol="CSHARE" />
           <StyledBalance>
-            <StyledValue>{displayTshareBalance}</StyledValue>
-            <Label text="TSHARE Available" />
+            <StyledValue>{displayCshareBalance}</StyledValue>
+            <Label text="CSHARE Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
 
         <StyledBalanceWrapper>
-          <TokenSymbol symbol="TBOND" />
+          <TokenSymbol symbol="CBOND" />
           <StyledBalance>
-            <StyledValue>{displayTbondBalance}</StyledValue>
-            <Label text="TBOND Available" />
+            <StyledValue>{displayCbondBalance}</StyledValue>
+            <Label text="CBOND Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
       </Balances>
